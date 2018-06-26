@@ -46,7 +46,7 @@
 		</div>
 		<div class="center">安心老後</div>
     </ons-toolbar>
-	<p style="text-align: center; opacity: 0.6; padding-top: 20px;">
+	<p style="text-align: center; padding-top: 0.1em; font-size: 1.5em;">
 		病気の情報の管理や、高齢者が生活を送るために必要な情報を提供します。
 	</p>
 
@@ -94,7 +94,7 @@
   <ons-page id="page-manage">
     <ons-toolbar>
       <div class="left">
-        <ons-toolbar-button onclick="fn.open()">
+        <ons-toolbar-button onclick="fn.open()" class ="toolbar-icon-font">
           <ons-icon icon="md-menu"></ons-icon>
 
         </ons-toolbar-button>
@@ -104,7 +104,7 @@
         病気の情報の管理
       </div>
       <div class="right">
-      	<ons-toolbar-button id="push-button-manage-listToEntry">
+      	<ons-toolbar-button id="push-button-manage-listToEntry" class="toolbar-icon-font">
 	      	<ons-icon icon="fa-plus-square-o"></ons-icon>
 	      	<span>登録</span>
 	    </ons-toolbar-button>
@@ -159,13 +159,13 @@
   <ons-page id="page-manage-entry">
     <ons-toolbar>
       <div class="left">
-        <ons-back-button>戻る</ons-back-button>
+        <ons-back-button class="toolbar-icon-font">戻る</ons-back-button>
       </div>
       <div class="center">
         病気の情報の管理
       </div>
       <div class="right">
-      	<ons-toolbar-button id="push-button-manage-entry">
+      	<ons-toolbar-button id="push-button-manage-entry" class="toolbar-icon-font">
 	      	<ons-icon icon="fa-check-square-o"></ons-icon>
 	      	<span>確定</span>
 	    </ons-toolbar-button>
@@ -359,17 +359,17 @@
   <ons-page id="page-manage-detail">
     <ons-toolbar inline>
       <div class="left">
-        <ons-back-button>戻る</ons-back-button>
+        <ons-back-button class="toolbar-icon-font">戻る</ons-back-button>
       </div>
       <div class="center">
         病気の情報の管理
       </div>
       <div class="right">
-      	<ons-toolbar-button id="push-button-manage-edit">
+      	<ons-toolbar-button id="push-button-manage-edit" class="toolbar-icon-font">
 	      	<ons-icon icon="fa-pencil-square-o"></ons-icon>
 	      	<span>編集</span>
 	    </ons-toolbar-button>
-      	<ons-toolbar-button id="push-button-manage-delete">
+      	<ons-toolbar-button id="push-button-manage-delete" class="toolbar-icon-font">
 	      	<ons-icon icon="fa-trash-o"></ons-icon>
 	      	<span>削除</span>
 	    </ons-toolbar-button>
@@ -427,13 +427,13 @@
 	<ons-page id="page-manage-illness-entry">
 		<ons-toolbar>
 			<div class="left">
-				<ons-back-button>戻る</ons-back-button>
+				<ons-back-button class="toolbar-icon-font">戻る</ons-back-button>
 			</div>
 			<div class="center">
 			病気の情報の管理
 			</div>
 			<div class="right">
-				<ons-toolbar-button id="push-button-manage-illness-entry">
+				<ons-toolbar-button id="push-button-manage-illness-entry" class="toolbar-icon-font">
 					<ons-icon icon="fa-check-square-o"></ons-icon>
 					<span>確定</span>
 				</ons-toolbar-button>
@@ -503,17 +503,17 @@
   <ons-page id="page-manage-illness-detail">
     <ons-toolbar inline>
       <div class="left">
-        <ons-back-button>戻る</ons-back-button>
+        <ons-back-button class="toolbar-icon-font">戻る</ons-back-button>
       </div>
       <div class="center">
         病気の情報の管理
       </div>
       <div class="right">
-      	<ons-toolbar-button id="push-button-manage-illness-edit">
+      	<ons-toolbar-button id="push-button-manage-illness-edit" class="toolbar-icon-font">
 	      	<ons-icon icon="fa-pencil-square-o"></ons-icon>
 	      	<span>編集</span>
 	    </ons-toolbar-button>
-      	<ons-toolbar-button id="push-button-manage-illness-delete">
+      	<ons-toolbar-button id="push-button-manage-illness-delete" class="toolbar-icon-font">
 	      	<ons-icon icon="fa-trash-o"></ons-icon>
 	      	<span>削除</span>
 	    </ons-toolbar-button>
@@ -536,7 +536,7 @@
 			主治医
 		</div>
 			<div id="show-illness-hospitalname" class="inpage_content_detail"></div>
-			<div id="show-illness-doctorname" class="inpage_content_detail"></div>
+			<div id="show-illness-doctorname" class="inpage_content_detail"></div>先生
 		<div class="left inpage_content_subtitle">
 			最近の症状
 		</div>
@@ -561,6 +561,23 @@
         年金についてのページ
       </div>
     </ons-toolbar>
+    <div>
+		<p style="padding-top: 0.1em; font-size: 1.5em;">
+			年金について正しい知識を身につけましょう
+		</p>
+		<p>
+			年金について - 日本年金機構
+		</p>
+		<p>
+			<a href="http://www.nenkin.go.jp/service/index.html">http://www.nenkin.go.jp/service/index.html</a>
+		</p>
+		<p>
+			ねんきんネット - 日本年金機構
+		</p>
+		<p>
+    		<a href="https://www.nenkin.go.jp/n_net/">https://www.nenkin.go.jp/n_net/</a>
+		</p>
+	</div>
   </ons-page>
 </template>
 

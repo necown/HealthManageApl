@@ -462,7 +462,7 @@ var showMedicineDetail = function(medicine_id, kind){
 			}else if(kind === 'show'){
 				document.getElementById('show-medicine-name').textContent = row.medicine_name;
 				document.getElementById('show-medicine-times').textContent = row.medicine_times;
-				document.getElementById('show-medicine-amount').textContent = row.medicine_amount + " " + row.medicine_unit;
+				document.getElementById('show-medicine-amount').textContent = "1回 " + row.medicine_amount + " " + row.medicine_unit;
 				document.getElementById('show-medicine-timing').textContent = row.medicine_timing;
 				console.log("row.medicine_alarmSwitch:" + row.medicine_alarmSwitch);
 				if(row.medicine_alarmSwitch == 'true'){
@@ -540,7 +540,7 @@ var showList = function(db){
 										+ row.medicine_name
 										+ '</span>'
 										+ '<span class="list-item__subtitle">'
-										+ row.medicine_times + " " + row.medicine_amount + row.medicine_unit
+										+ row.medicine_times + " 1回" + row.medicine_amount + row.medicine_unit
 										+ '</span>'
 										+ '<span class="list-item__subtitle">'
 										+ row.medicine_timing
@@ -830,7 +830,8 @@ function entryAlarm(_id, mname, mtimes, mstart, malarm, oldSwitch){
 			console.log("almDate:" + almDate);
 
 			//scheduleではfirstAt+everyの時間が初回となってしまうためfirstAtからeveryをひいておく
-			almDate.setMinutes(almDate.getMinutes() - everyMinutes);
+			//毎日１分ずつずれていくのでひいておく
+			almDate.setMinutes(almDate.getMinutes() - everyMinutes - 1);
 			console.log("almDate:" + almDate);
 
 			var id = _id*100 + count;
@@ -854,6 +855,7 @@ function entryAlarm(_id, mname, mtimes, mstart, malarm, oldSwitch){
 //						unit: "day",
 						led: "FF0000",
 						foreground: true,
+						smallIcon: "res://ic_launcher",
 						data:{
 							test: id
 						}
@@ -880,6 +882,7 @@ function entryAlarm(_id, mname, mtimes, mstart, malarm, oldSwitch){
 //						unit: "day",
 						led: "FF0000",
 						foreground: true,
+						smallIcon: "res://ic_launcher",
 						data:{
 							test: id
 						}
@@ -892,6 +895,7 @@ function entryAlarm(_id, mname, mtimes, mstart, malarm, oldSwitch){
 	}
 
 	console.log("entryAlarm"+mname);
+//	console.log(cordova.plugins.notification.local.getDefaults());
 
 	cordova.plugins.notification.local.on("schedule",function(notification){
 //		alert("scheduled:"+notification.id);
@@ -1066,7 +1070,7 @@ var showListIllness = function(db){
 										+ 'modifer="chevron" '
 										+ 'tappable>'
 										+ '<div class="left info-list-icon">'
-										+ '<ons-icon class="list-item__icon" icon="fa-hospital-o"></ons-icon>'
+										+ '<ons-icon class="list-item__icon" icon="fa-heartbeat"></ons-icon>'
 										+ '</div>'
 										+ '<div class="center">'
 										+ '<span class="list-item__title">'

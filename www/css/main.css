@@ -81,32 +81,33 @@
 }
 
 .category_wrapper{
-	max-width: 120px;
+	max-width: 12em;
 	width: 90%;
 	margin: auto;
 	background-color:#E4E4E4;
 	background-image:linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
 	box-shadow: 5px 5px 5px rgba(0,0,0,0.1);
 	border-radius: 5%;
+	line-height: 3em;
 }
 
 .category_thumbnail{
 	display: inline-block;
 	margin: 16px 0px;
-	max-width: 120px;
+	max-width: 12em;
 	width: 100%;
 	text-align: center;
 }
 
 .category_wrapper ons-icon{
-	font-size: 55px;
+	font-size: 4em;
 	padding-top: 10px;
 	line-height: 0.75em;
 	color: blue;
 }
 
 .category_title{
-	font-size: 12px;
+	font-size: 1.5em;
 	font-weight: bold;
 	padding-top: 10px;
 	color: blue;
