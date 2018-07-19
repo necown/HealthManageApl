@@ -5,9 +5,13 @@
         <link rel="stylesheet" type="text/css" href="css/onsenui.css">
         <link rel="stylesheet" type="text/css" href="css/onsen-css-components.css">
         <link rel="stylesheet" type="text/css" href="css/main.css">
-        <title>安心老後</title>
+        <title>老後の健康管理</title>
     </head>
     <body>
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="angular.min.js"></script>
+<script type="text/javascript" src="js/onsenui.js"></script>
+<script type="text/javascript" src="js/angular-onsenui.js"></script>
     <ons-splitter>
 		<ons-splitter-side id="menu" side="left" width="220px" collapse swipeable>
 		<ons-page>
@@ -44,10 +48,10 @@
 
 			</ons-toolbar-button>
 		</div>
-		<div class="center">安心老後</div>
+		<div class="center">老後の健康管理</div>
     </ons-toolbar>
-	<p style="text-align: center; padding-top: 0.1em; font-size: 1.5em;">
-		病気の情報の管理や、高齢者が生活を送るために必要な情報を提供します。
+	<p style="text-align: center; padding-top: 0.1em; font-size: 1.5em;white-space: nowrap;">
+		病気の情報の管理や、<wbr>老後生活に必要な情報を<wbr>提供します。
 	</p>
 
 	<ons-row class="category">
@@ -55,7 +59,7 @@
 			<div class="category_wrapper">
 				<figure class="category_thumbnail">
 					<ons-icon icon="fa-medkit"></ons-icon>
-					<div class="category_title">病気の情報管理</div>
+					<div class="category_title">病気の管理</div>
 				</figure>
 			</div>
 		</ons-col>
@@ -111,8 +115,12 @@
       </div>
     </ons-toolbar>
 	<ons-tabbar swipable position="top">
-		<ons-tab page="manage_illness.html" label="病気" active></ons-tab>
-		<ons-tab page="manage_medicine.html" label="服用"></ons-tab>
+		<ons-tab page="manage_illness.html" label="病気" class="tab_font" active>
+			<ons-icon icon="fa-heartbeat" class="icon_padding"></ons-icon>
+		</ons-tab>
+		<ons-tab page="manage_medicine.html" label="服用" class="tab_font">
+			<ons-icon icon="fa-medkit" class="icon_padding"></ons-icon>
+		</ons-tab>
 	</ons-tabbar>
 <!--
     <div class="inpage_title">
@@ -536,7 +544,7 @@
 			主治医
 		</div>
 			<div id="show-illness-hospitalname" class="inpage_content_detail"></div>
-			<div id="show-illness-doctorname" class="inpage_content_detail"></div>先生
+			<div id="show-illness-doctorname" class="inpage_content_detail"></div>
 		<div class="left inpage_content_subtitle">
 			最近の症状
 		</div>
@@ -561,21 +569,20 @@
         年金についてのページ
       </div>
     </ons-toolbar>
-    <div>
-		<p style="padding-top: 0.1em; font-size: 1.5em;">
+    <div class="content">
+		<p style="font-size: 1.5em;">
 			年金について正しい知識を身につけましょう
 		</p>
-		<p>
-			年金について - 日本年金機構
+		<p style="font-size: 1.0em;">
+			リンクをタップするとウェブページを開きます
 		</p>
+		<br>
 		<p>
-			<a href="http://www.nenkin.go.jp/service/index.html">http://www.nenkin.go.jp/service/index.html</a>
+			<a href="http://www.nenkin.go.jp/service/index.html"><ons-icon icon="fa-share-square-o"></ons-icon>年金について - 日本年金機構</a>
 		</p>
+		<br>
 		<p>
-			ねんきんネット - 日本年金機構
-		</p>
-		<p>
-    		<a href="https://www.nenkin.go.jp/n_net/">https://www.nenkin.go.jp/n_net/</a>
+    		<a href="https://www.nenkin.go.jp/n_net/"><ons-icon icon="fa-share-square-o"></ons-icon>ねんきんネット - 日本年金機構</a>
 		</p>
 	</div>
   </ons-page>
@@ -611,10 +618,7 @@
   </ons-page>
 </template>
 
-<script type="text/javascript" src="cordova.js"></script>
-<script type="text/javascript" src="angular.min.js"></script>
-<script type="text/javascript" src="js/onsenui.js"></script>
-<script type="text/javascript" src="js/angular-onsenui.js"></script>
+
 <script type="text/javascript" src="js/main.js"></script>
 
     </body>

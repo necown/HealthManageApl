@@ -39,24 +39,33 @@
 		}
 	});
 
-	document.addEventListener('buckbutton', function(event) {
-		var page = event.target;
+//	document.addEventListener('deviceready', function(event) {
+//		document.addEventListener('backbutton', function(event) {
+//			var page = event.target;
+//			alert("backbutton pageid:"+ page.id);
 
-		//服薬登録ページ
-		if(page.id === 'page-manage-entry'){
+			//服薬登録ページ
+//			if(page.id === 'page-manage-entry' || page.id === 'page-manage-illness-entry'){
 
-			ons.notification.confirm({
-				message: '編集していた内容は保存されません。よろしいですか？',
-				title: '＜確認してください＞',
-				buttonLabels: [" はい "," いいえ "],
-				callback: function(answer){
-					if(answer === 0){
-						document.querySelector('#navi').popPage();					}
-				}
-			});
+//				ons.notification.confirm({
+//					message: '編集していた内容は保存されません。よろしいですか？',
+//					title: '＜確認してください＞',
+//					buttonLabels: [" はい "," いいえ "],
+//					callback: function(answer){
+//						if(answer === 0){
+//							document.querySelector('#navi').popPage();
+//						}
+//					}
+//				});
 
-		}
-	});
+//			}else{
+//				document.querySelector('#navi').popPage();
+//			}
+//		},false);
+
+//	},false);
+
+
 
 	document.addEventListener('init', function(event) {
 		var page = event.target;
@@ -111,6 +120,8 @@
 
 		//服薬情報登録
 		} else if(page.id === 'page-manage-entry'){
+
+			backbuttonConfirm();
 
 			displayMedTemp();
 			unCheckedSelect('entry-medicine-timing');
@@ -301,6 +312,8 @@
 //			}
 			//持病情報登録
 		} else if(page.id === 'page-manage-illness-entry'){
+
+			backbuttonConfirm();
 
 			//登録ボタン
 			page.querySelector('#push-button-manage-illness-entry').onclick = function() {
@@ -817,7 +830,8 @@ function entryAlarm(_id, mname, mtimes, mstart, malarm, oldSwitch){
 	var ck = document.getElementById('entry-medicine-alarm').options;
 //	console.log("now.toLocaleDateString():" + now.toLocaleDateString());
 	console.log("mtimes:" + mtimes);
-	var everyMinutes = dic[mtimes] * 24 * 60;
+	//毎日１分ずつずれていくのでひいておく
+	var everyMinutes = (dic[mtimes] * 24 * 60) -1;
 	console.log("everyMinutes:" + everyMinutes);
 
 
@@ -830,8 +844,7 @@ function entryAlarm(_id, mname, mtimes, mstart, malarm, oldSwitch){
 			console.log("almDate:" + almDate);
 
 			//scheduleではfirstAt+everyの時間が初回となってしまうためfirstAtからeveryをひいておく
-			//毎日１分ずつずれていくのでひいておく
-			almDate.setMinutes(almDate.getMinutes() - everyMinutes - 1);
+			almDate.setMinutes(almDate.getMinutes() - everyMinutes);
 			console.log("almDate:" + almDate);
 
 			var id = _id*100 + count;
@@ -1021,7 +1034,7 @@ var showIllnessDetail = function(illness_id, kind){
 				document.getElementById('show-illness-name').textContent = row.illness_name;
 				document.getElementById('show-illness-from').textContent = row.illness_from + " 頃から";
 				document.getElementById('show-illness-hospitalname').textContent = row.illness_hospitalname;
-				document.getElementById('show-illness-doctorname').textContent = row.illness_doctorname;
+				document.getElementById('show-illness-doctorname').textContent = row.illness_doctorname + " 先生";
 				document.getElementById('show-illness-symptom').textContent = row.illness_symptom;
 			}
 
@@ -1111,3 +1124,22 @@ var goIllnessDetail = function(illness_id){
 	document.querySelector('#navi').pushPage('manage_illness_detail.html', {data: {page_illness_id: illness_id}});
 	showIllnessDetail(illness_id, 'show');
 }
+
+
+function backbuttonConfirm(){
+	var epage = document.querySelector('#navi').topPage;
+	epage.onDeviceBackButton = function(event){
+		ons.notification.confirm({
+			message: '編集していた内容は保存されません。よろしいですか？',
+			title: '＜確認してください＞',
+			buttonLabels: [" はい "," いいえ "],
+			callback: function(answer){
+				if(answer === 0){
+					document.querySelector('#navi').popPage();
+				}
+			}
+		});
+	}
+
+}
+

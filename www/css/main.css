@@ -130,5 +130,17 @@ ons-toolbar-button > span{
 	vertical-align: top;
 }
 
-.init_list_toast{
+.icon_padding{
+	padding-right: 0.3em;
+}
+
+.tab_font{
+    font-size: 3em;
+}
+
+.content{
+	text-align: left;
+	width: 100%;
+	padding: 0.1em;
+
 }
