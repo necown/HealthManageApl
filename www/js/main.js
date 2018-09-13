@@ -1,6 +1,7 @@
 /**
  *
  */
+/*
 	window.fn = {};
 
 	window.fn.open = function() {
@@ -15,7 +16,7 @@
 		menu.close();
 		navi.resetToPage(page, { animation: 'fade' });
 	};
-
+*/
 	document.addEventListener('show', function(event) {
 		var page = event.target;
 
@@ -38,6 +39,11 @@
 
 		}
 	});
+
+	document.addEventListener('deviceready', function(event) {
+		console.log("deviceready");
+	});
+
 
 //	document.addEventListener('deviceready', function(event) {
 //		document.addEventListener('backbutton', function(event) {
@@ -302,6 +308,9 @@
 				});
 			};
 
+//			page.querySelector('#push-button-manage-show-alarm').onclick = function() {
+//					showAlarm(page.data.page_medicine_id);
+//			}
 
 //			page.querySelector('#push-button-manage-deleteAlarm').onclick = function() {
 //
@@ -399,7 +408,7 @@
 				}
 
 			};
-			//服薬情報詳細
+			//持病情報詳細
 		} else if(page.id === 'page-manage-illness-detail'){
 
 			//編集ボタン
@@ -671,6 +680,17 @@ function inputCheck(data){
 			if(data.mstart == ""){
 				mes += "<li>お知らせを開始する日を入力してください</li>";
 			}
+			var now = new Date();
+			now.setHours(00);
+			now.setMinutes(00);
+			now.setSeconds(00);
+
+			var msatartDate = new Date(data.mstart);
+			if(msatartDate < now){
+				mes += "<li>お知らせを開始する日は今日以降を入力してください</li>";
+			}
+
+
 			//アラーム時間
 			if(data.malarm == ""){
 				mes += "<li>お知らせする時間を入力してください</li>";
@@ -782,9 +802,9 @@ function unCheckedSelect(id){
 
 function entryAlarm(_id, mname, mtimes, mstart, malarm, oldSwitch){
 
-	var noww = new Date().getTime(),
-	_5_sec_from_now = new Date(noww + 10*1000);
-	console.log(_5_sec_from_now);
+//	var noww = new Date().getTime(),
+//	_5_sec_from_now = new Date(noww + 10*1000);
+//	console.log(_5_sec_from_now);
 
 //	var now = new Date();
 //	console.log(now.getFullYear());
@@ -831,17 +851,30 @@ function entryAlarm(_id, mname, mtimes, mstart, malarm, oldSwitch){
 //	console.log("now.toLocaleDateString():" + now.toLocaleDateString());
 	console.log("mtimes:" + mtimes);
 	//毎日１分ずつずれていくのでひいておく
-	var everyMinutes = (dic[mtimes] * 24 * 60) -1;
+//	var everyMinutes = (dic[mtimes] * 24 * 60) -1;
+	var everyMinutes = (dic[mtimes] * 24 * 60) ;
 	console.log("everyMinutes:" + everyMinutes);
 
 
 	//ckのselectedごとにアラームをセット
 	var count = 0;
+	deleteAlarm(_id);
+
 	for(var i in ck){
+
 		if(ck[i].selected == true){
-			count++;
+
 			var almDate = new Date(mstart + " " + ck[i].value);
 			console.log("almDate:" + almDate);
+
+			//初回が過去の時間となってしまう場合は、firstAtを次回の時間にする
+			var now = new Date();
+			if(now > almDate){
+//				almDate.setMinutes(almDate.getMinutes() + everyMinutes + 1);
+				almDate.setMinutes(almDate.getMinutes() + everyMinutes);
+				console.log("almDate:" + almDate);
+			}
+
 
 			//scheduleではfirstAt+everyの時間が初回となってしまうためfirstAtからeveryをひいておく
 			almDate.setMinutes(almDate.getMinutes() - everyMinutes);
@@ -850,7 +883,7 @@ function entryAlarm(_id, mname, mtimes, mstart, malarm, oldSwitch){
 			var id = _id*100 + count;
 			console.log("id:" + id);
 
-			if(oldSwitch == false){
+//			if(oldSwitch == false){
 				console.log("alarm entry:start");
 				//新規登録
 				cordova.plugins.notification.local.schedule(
@@ -859,11 +892,14 @@ function entryAlarm(_id, mname, mtimes, mstart, malarm, oldSwitch){
 						title: '服薬時間のお知らせ',
 						text: mname,
 						sound: null,
+						priority: 2,//max=2
 //						at: almDate,
 //						firstAt: almDate,
 //						every: everyMinutes,
 //１						trigger: {after: almDate, every: {hour:22, minute:40, second:0}},
+//						trigger: {firstAt: almDate, every: everyMinutes, unit: "minute", count: 365},
 						trigger: {firstAt: almDate, every: everyMinutes, unit: "minute"},
+//						trigger: {firstAt: new Date(), every: 5, unit: "minute"},
 //						every: 1,
 //						unit: "day",
 						led: "FF0000",
@@ -877,34 +913,37 @@ function entryAlarm(_id, mname, mtimes, mstart, malarm, oldSwitch){
 				);
 				console.log("alarm entry:end");
 
-			}else{
-				console.log("alarm update:start");
-				//更新
-				cordova.plugins.notification.local.update(
-					{
-						id: id,
-						title: '服薬時間のお知らせ',
-						text: mname,
-						sound: null,
-//						at: almDate,
-//						firstAt: almDate,
-//						every: everyMinutes,
-//１						trigger: {after: almDate, every: {hour:22, minute:40, second:0}},
-						trigger: {firstAt: almDate, every: everyMinutes, unit: "minute"},
-//						every: 1,
-//						unit: "day",
-						led: "FF0000",
-						foreground: true,
-						smallIcon: "res://ic_launcher",
-						data:{
-							test: id
-						}
-					}
-				);
-				console.log("alarm update:end");
-			}
+//			}else{
+//				console.log("alarm update:start");
+//				//更新
+//				cordova.plugins.notification.local.update(
+//					{
+//						id: id,
+//						title: '服薬時間のお知らせ',
+//						text: mname,
+//						sound: null,
+//						trigger: {firstAt: almDate, every: everyMinutes, unit: "minute"},
+//						led: "FF0000",
+//						foreground: true,
+//						smallIcon: "res://ic_launcher",
+//						data:{
+//							test: id
+//						}
+//					}
+//				);
+//				console.log("alarm update:end");
+//			}
+
+//			cordova.plugins.notification.local.get(id, function(notifications){
+//				alert("id:"+notifications.id);
+//				alert("text:"+notifications.text);
+//				var firstAtDate = new Date(notifications.trigger["firstAt"]);
+//				alert("firstAt:"+firstAtDate);
+//				alert("every:"+notifications.trigger["every"]);
+//			});
 
 		}
+		count++;
 	}
 
 	console.log("entryAlarm"+mname);
@@ -921,22 +960,50 @@ function entryAlarm(_id, mname, mtimes, mstart, malarm, oldSwitch){
 
 	});
 	cordova.plugins.notification.local.on("click",function(notification){
-		goMedicineDetail(' + notification.id + ')
+		console.log("cordova.plugins.notification.local.on.click");
+		var id = Math.floor(notification.id / 100);
+		console.log("click id:"+id);
+		goMedicineDetail(id);
+//		setTimeout(goMedicineDetail, 3000, notification.id);
 	});
 
+}
+
+function showAlarm(_id){
+	for(var count = 0; count < 48; count++){
+		var id = _id*100 + count;
+		cordova.plugins.notification.local.get(id, function(notifications){
+			if(notifications.id){
+				alert("id:"+notifications.id);
+				alert("text:"+notifications.text);
+				var firstAtDate = new Date(notifications.trigger["firstAt"]);
+				alert("firstAt:"+firstAtDate);
+				alert("every:"+notifications.trigger["every"]);
+//				alert("firstAt:"+JSON.stringify(notifications.trigger.firstAt));
+//				alert("every:"+JSON.stringify(notifications.trigger.every));
+			}
+		});
+	}
 }
 
 function deleteAlarm(_id){
 
 	console.log("deleteAlarm:" + _id);
 
+	var idAry = [];
+
 	for(var count = 0; count < 48; count++){
-		var id = _id*100 + count;
-		cordova.plugins.notification.local.cancel(id,function(){
-			console.log("canceled:"+id);
-		});
+	//	var id = _id*100 + count;
+		idAry.push(_id*100 + count);
+	//	cordova.plugins.notification.local.cancel(id,function(){
+	//		console.log("canceled:"+id);
+	//	});
 
 	}
+	cordova.plugins.notification.local.cancel(idAry,function(){
+		console.log("canceled:"+idAry);
+	});
+
 }
 
 function deleteAlarmAll(){
@@ -1130,7 +1197,7 @@ function backbuttonConfirm(){
 	var epage = document.querySelector('#navi').topPage;
 	epage.onDeviceBackButton = function(event){
 		ons.notification.confirm({
-			message: '編集していた内容は保存されません。よろしいですか？',
+			message: '編集していた内容は保存されません。前の画面に戻りますか？',
 			title: '＜確認してください＞',
 			buttonLabels: [" はい "," いいえ "],
 			callback: function(answer){

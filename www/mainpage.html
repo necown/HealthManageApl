@@ -5,13 +5,14 @@
         <link rel="stylesheet" type="text/css" href="css/onsenui.css">
         <link rel="stylesheet" type="text/css" href="css/onsen-css-components.css">
         <link rel="stylesheet" type="text/css" href="css/main.css">
-        <title>老後の健康管理</title>
+        <title>持病と服薬情報の管理</title>
     </head>
     <body>
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript" src="angular.min.js"></script>
 <script type="text/javascript" src="js/onsenui.js"></script>
 <script type="text/javascript" src="js/angular-onsenui.js"></script>
+<!--
     <ons-splitter>
 		<ons-splitter-side id="menu" side="left" width="220px" collapse swipeable>
 		<ons-page>
@@ -48,7 +49,7 @@
 
 			</ons-toolbar-button>
 		</div>
-		<div class="center">老後の健康管理</div>
+		<div class="center">老後の役立ちアプリ</div>
     </ons-toolbar>
 	<p style="text-align: center; padding-top: 0.1em; font-size: 1.5em;white-space: nowrap;">
 		病気の情報の管理や、<wbr>老後生活に必要な情報を<wbr>提供します。
@@ -94,9 +95,12 @@
 	</ons-page>
 </template>
 
+ -->
+<ons-navigator id="navi" page="manage.html"></ons-navigator>
 <template id="manage.html">
   <ons-page id="page-manage">
     <ons-toolbar>
+<!--
       <div class="left">
         <ons-toolbar-button onclick="fn.open()" class ="toolbar-icon-font">
           <ons-icon icon="md-menu"></ons-icon>
@@ -104,8 +108,9 @@
         </ons-toolbar-button>
 
       </div>
+ -->
       <div class="center">
-        病気の情報の管理
+        病気と服用情報の管理
       </div>
       <div class="right">
       	<ons-toolbar-button id="push-button-manage-listToEntry" class="toolbar-icon-font">
@@ -122,6 +127,7 @@
 			<ons-icon icon="fa-medkit" class="icon_padding"></ons-icon>
 		</ons-tab>
 	</ons-tabbar>
+
 <!--
     <div class="inpage_title">
 		服用情報の一覧
@@ -170,7 +176,7 @@
         <ons-back-button class="toolbar-icon-font">戻る</ons-back-button>
       </div>
       <div class="center">
-        病気の情報の管理
+        服用情報の管理
       </div>
       <div class="right">
       	<ons-toolbar-button id="push-button-manage-entry" class="toolbar-icon-font">
@@ -365,12 +371,12 @@
 
 <template id="manage_detail.html">
   <ons-page id="page-manage-detail">
-    <ons-toolbar inline>
+    <ons-toolbar>
       <div class="left">
         <ons-back-button class="toolbar-icon-font">戻る</ons-back-button>
       </div>
       <div class="center">
-        病気の情報の管理
+        服用情報の管理
       </div>
       <div class="right">
       	<ons-toolbar-button id="push-button-manage-edit" class="toolbar-icon-font">
@@ -416,6 +422,9 @@
 			<ons-button id="push-button-manage-delete">服用情報の削除</ons-button>
 		</p>
  -->
+ <!--
+		<ons-button id="push-button-manage-show-alarm">アラーム表示</ons-button>
+  -->
     </div>
   </ons-page>
 </template>
@@ -491,10 +500,13 @@
 			<div class="left inpage_content_subtitle">
 				最近の症状
 			</div>
-			<div class="inpage_content_input">
+			<div class="inpage_content_input_not_flex">
 				<div class="inpage_content_explain_input">最近の症状を入力してください</div>
 				<div class="inpage_content_area_input">
+					<textarea id="entry-illness-symptom" class="textarea" placeholder="○月○日　症状" cols="40" rows="5"></textarea>
+					<!--
 					<ons-input id="entry-illness-symptom" modifier="underbar" placeholder="症状"></ons-input>
+					 -->
 				</div>
 			</div>
 
@@ -509,7 +521,7 @@
  -->
 <template id="manage_illness_detail.html">
   <ons-page id="page-manage-illness-detail">
-    <ons-toolbar inline>
+    <ons-toolbar>
       <div class="left">
         <ons-back-button class="toolbar-icon-font">戻る</ons-back-button>
       </div>
@@ -570,9 +582,11 @@
       </div>
     </ons-toolbar>
     <div class="content">
+    <!--
 		<p style="font-size: 1.5em;">
 			年金について正しい知識を身につけましょう
 		</p>
+	 -->
 		<p style="font-size: 1.0em;">
 			リンクをタップするとウェブページを開きます
 		</p>
@@ -600,6 +614,20 @@
         介護についてのページ
       </div>
     </ons-toolbar>
+    <div class="content">
+		<p style="font-size: 1.0em;">
+			リンクをタップするとウェブページを開きます
+		</p>
+		<br>
+		<p>
+			<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/kaigo_koureisha/gaiyo/index.html"><ons-icon icon="fa-share-square-o"></ons-icon>介護保険制度の概要 - 厚生労働省</a>
+		</p>
+		<br>
+		<p>
+    		<a href="http://www.kaigokensaku.mhlw.go.jp/"><ons-icon icon="fa-share-square-o"></ons-icon>介護事業所・生活関連情報検索 - 厚生労働省</a>
+		</p>
+	</div>
+
   </ons-page>
 </template>
 
@@ -612,9 +640,14 @@
         </ons-toolbar-button>
       </div>
       <div class="center">
-        しがない主婦のなんでもお聞きしますよのページ
+        相談ページ
       </div>
     </ons-toolbar>
+    <div class="content">
+		<p style="font-size: 1.0em;">
+			準備中
+		</p>
+	</div>
   </ons-page>
 </template>
 
