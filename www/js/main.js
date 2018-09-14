@@ -45,34 +45,6 @@
 	});
 
 
-//	document.addEventListener('deviceready', function(event) {
-//		document.addEventListener('backbutton', function(event) {
-//			var page = event.target;
-//			alert("backbutton pageid:"+ page.id);
-
-			//服薬登録ページ
-//			if(page.id === 'page-manage-entry' || page.id === 'page-manage-illness-entry'){
-
-//				ons.notification.confirm({
-//					message: '編集していた内容は保存されません。よろしいですか？',
-//					title: '＜確認してください＞',
-//					buttonLabels: [" はい "," いいえ "],
-//					callback: function(answer){
-//						if(answer === 0){
-//							document.querySelector('#navi').popPage();
-//						}
-//					}
-//				});
-
-//			}else{
-//				document.querySelector('#navi').popPage();
-//			}
-//		},false);
-
-//	},false);
-
-
-
 	document.addEventListener('init', function(event) {
 		var page = event.target;
 
