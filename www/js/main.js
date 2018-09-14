@@ -59,7 +59,6 @@
 //			showList(db);test
 
 
-
     		};
 	    	//年金
 			page.querySelector('#push-button-money').onclick = function() {
