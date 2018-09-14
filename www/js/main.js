@@ -54,10 +54,6 @@
 			page.querySelector('#push-button-manage').onclick = function() {
 				document.querySelector('#navi').pushPage('manage.html', {data: {title: '病気の情報の管理'}});
 
-//			var db = openDatabase('medicinedb','','WebSQL DB',1024*1024*10);test
-
-//			showList(db);test
-
 
     		};
 	    	//年金
