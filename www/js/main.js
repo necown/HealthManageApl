@@ -53,8 +53,6 @@
 			//情報管理
 			page.querySelector('#push-button-manage').onclick = function() {
 				document.querySelector('#navi').pushPage('manage.html', {data: {title: '病気の情報の管理'}});
-
-
     		};
 	    	//年金
 			page.querySelector('#push-button-money').onclick = function() {
@@ -71,11 +69,6 @@
 
 		//服薬管理一覧
 		} else if(page.id === 'page-manage'){
-
-//			var db = openDatabase('medicinedb','0.1','WebSQL DB',1024*1024*10);
-
-//			console.log("init page-manage");
-//			showList(db);
 
 			//登録ボタン
 			page.querySelector('#push-button-manage-listToEntry').onclick = function() {
